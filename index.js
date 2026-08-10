@@ -1,9 +1,10 @@
 const express = require('express');
 const admin = require('firebase-admin');
+const { getFirestore } = require('firebase-admin/firestore');
 
 // Inicijalizacija Firebase Admin SDK-a
 admin.initializeApp();
-const db = admin.firestore();
+const db = getFirestore();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
