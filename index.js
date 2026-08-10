@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 
+// Bazna ruta za Health Check (potrebna za Cloud Run)
+app.get('/', (req, res) => {
+  res.status(200).send('DPP Router radi ispravno.');
+});
+
 // GS1 Digital Link & DPP Gateway ruta (EN 18222 / EN 18223)
 app.get('/:tenantId/products/:productId', async (req, res) => {
   const { tenantId, productId } = req.params;
@@ -38,6 +43,7 @@ app.get('/:tenantId/products/:productId', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+// Eksplicitno slušanje na 0.0.0.0 za kontejnerska okruženja
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`DPP Router pokrenut na portu ${PORT}`);
 });
