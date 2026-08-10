@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Instaliramo samo produkcijske ovisnosti radi manje veličine kontejnera
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Kopiramo ostatak koda aplikacije
 COPY . .
